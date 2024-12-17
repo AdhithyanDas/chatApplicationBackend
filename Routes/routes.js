@@ -12,8 +12,9 @@ const router = express.Router()
 router.post('/reg', userController.userRegistration)
 router.post('/log', userController.userLogin)
 router.put('/updateprofile', jwtMiddle, multerConfigForProfile.single('profilePic'), userController.profileUpdate)
+router.delete('/delaccount/:email', jwtMiddle, userController.deleteAccount)
 
-router.get('/users', jwtMiddle, messageController.getUsersForSidebar)
+router.get('/home', jwtMiddle, messageController.getUsersForSidebar)
 router.post('/sendmessage/:id', jwtMiddle, multerConfigForImages.single('images'), messageController.sendMessages)
 router.get('/getmessage/:id', jwtMiddle, messageController.getMessages)
 

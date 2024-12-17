@@ -82,3 +82,15 @@ exports.profileUpdate = async (req, res) => {
         res.status(400).json(err)
     }
 }
+
+
+exports.deleteAccount = async (req, res) => {
+    try {
+        const { email } = req.params
+        const result = await Users.findOneAndDelete({ email: email })
+        res.status(200).json(result)
+    } catch (err) {
+        console.log(err);
+        res.status(400).json(err)
+    }
+}

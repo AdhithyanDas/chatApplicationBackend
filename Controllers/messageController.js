@@ -12,6 +12,7 @@ exports.getUsersForSidebar = async (req, res) => {
     }
 }
 
+
 exports.sendMessages = async (req, res) => {
     try {
         const { text } = req.body
@@ -30,6 +31,7 @@ exports.sendMessages = async (req, res) => {
         res.status(400).json(err)
     }
 }
+
 
 exports.getMessages = async (req, res) => {
     try {
