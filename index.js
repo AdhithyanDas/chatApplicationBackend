@@ -10,7 +10,7 @@ chatApp.use(cors())
 chatApp.use(express.json())
 chatApp.use(routes)
 
-chatApp.use('/profilePics',express.static('./profilePics'))
+chatApp.use('/profilePics', express.static('./profilePics'))
 
 const PORT = 3000 || process.env.PORT
 

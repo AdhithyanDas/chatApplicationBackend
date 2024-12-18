@@ -5,7 +5,6 @@ const messageController = require('../Controllers/messageController')
 
 const jwtMiddle = require('../Middleware/jwtMiddleware')
 const multerConfigForProfile = require('../Middleware/multerConfigForProfile')
-const multerConfigForImages = require('../Middleware/multerConfigForImages')
 
 const router = express.Router()
 
@@ -15,7 +14,7 @@ router.put('/updateprofile', jwtMiddle, multerConfigForProfile.single('profilePi
 router.delete('/delaccount/:email', jwtMiddle, userController.deleteAccount)
 
 router.get('/home', jwtMiddle, messageController.getUsersForSidebar)
-router.post('/sendmessage/:id', jwtMiddle, multerConfigForImages.single('images'), messageController.sendMessages)
+router.post('/sendmessage/:id', jwtMiddle, messageController.sendMessages)
 router.get('/getmessage/:id', jwtMiddle, messageController.getMessages)
 
 module.exports = router

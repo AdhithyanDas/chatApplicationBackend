@@ -47,7 +47,7 @@ exports.userLogin = async (req, res) => {
                     res.status(404).json("Invalid email/password")
                 } else {
                     const token = jwt.sign({ userId: existingUser._id }, process.env.SECRET_KEY)
-                    res.status(200).json({ token, fullName: existingUser.fullName, email: existingUser.email, profilePic: existingUser.profilePic })
+                    res.status(200).json({ token, fullName: existingUser.fullName, email: existingUser.email, profilePic: existingUser.profilePic, _id: existingUser._id })
                 }
             } else {
                 res.status(404).json("Invalid email/password")

@@ -16,15 +16,13 @@ exports.getUsersForSidebar = async (req, res) => {
 exports.sendMessages = async (req, res) => {
     try {
         const { text } = req.body
-        const images = req.file.filename
         const { id: receiverId } = req.params
         const senderId = req.payload
-
         const newMessage = new Message({
-            text, images, receiverId, senderId
+            text, receiverId, senderId
         })
         await newMessage.save()
-        res.status(201).json(newMessage)
+        res.status(200).json(newMessage)
 
     } catch (err) {
         console.log(err);
