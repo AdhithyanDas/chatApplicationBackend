@@ -4,7 +4,8 @@ const cors = require('cors')
 const routes = require('./Routes/routes')
 require("./Connection/db")
 
-const chatApp = express()
+const { chatApp, server } = require('./Socket/socket')
+// const chatApp = express()
 
 chatApp.use(cors())
 chatApp.use(express.json())
@@ -14,6 +15,6 @@ chatApp.use('/profilePics', express.static('./profilePics'))
 
 const PORT = 3000 || process.env.PORT
 
-chatApp.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server running at : ${PORT}`);
 })

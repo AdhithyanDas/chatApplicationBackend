@@ -1,6 +1,7 @@
 const Users = require("../Models/userModel");
 const Message = require("../Models/messageModel")
 const Conversation = require("../Models/conversationModel");
+const { getReceiverSocketId, io } = require("../Socket/socket");
 
 exports.getUsersForSidebar = async (req, res) => {
     try {
@@ -45,6 +46,17 @@ exports.sendMessages = async (req, res) => {
 
         // Save the updated conversation
         await conversation.save();
+
+        const receiverSocketId = getReceiverSocketId(receiverId)
+        if (receiverSocketId) {
+            io.to(receiverSocketId).emit("newMessage", {
+                _id: newMessage._id,
+                senderId,
+                receiverId,
+                text,
+                createdAt: newMessage.createdAt,
+            })
+        }
 
         // Return the new message as a response
         res.status(201).json(newMessage);
