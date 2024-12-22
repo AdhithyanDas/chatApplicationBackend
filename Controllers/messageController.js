@@ -68,6 +68,7 @@ exports.sendMessages = async (req, res) => {
 }
 
 
+
 exports.getMessages = async (req, res) => {
     try {
         const { id: anotherUserId } = req.params
