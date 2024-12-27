@@ -5,7 +5,6 @@ const routes = require('./Routes/routes')
 require("./Connection/db")
 
 const { chatApp, server } = require('./Socket/socket')
-// const chatApp = express()
 
 chatApp.use(cors())
 chatApp.use(express.json())

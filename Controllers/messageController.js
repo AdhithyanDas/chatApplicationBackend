@@ -29,7 +29,7 @@ exports.sendMessages = async (req, res) => {
         if (!conversation) {
             conversation = await Conversation.create({
                 participants: [senderId, receiverId],
-                messages: [], // initialize with an empty array
+                messages: [],
             });
         }
 
@@ -41,10 +41,7 @@ exports.sendMessages = async (req, res) => {
 
         await newMessage.save();
 
-        // Add the new message to the conversation's messages array
         conversation.messages.push(newMessage._id);
-
-        // Save the updated conversation
         await conversation.save();
 
         const receiverSocketId = getReceiverSocketId(receiverId)
@@ -58,7 +55,6 @@ exports.sendMessages = async (req, res) => {
             })
         }
 
-        // Return the new message as a response
         res.status(201).json(newMessage);
 
     } catch (err) {
@@ -66,7 +62,6 @@ exports.sendMessages = async (req, res) => {
         res.status(400).json(err)
     }
 }
-
 
 
 exports.getMessages = async (req, res) => {

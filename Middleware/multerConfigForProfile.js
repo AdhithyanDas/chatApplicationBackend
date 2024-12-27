@@ -14,7 +14,7 @@ const fileFilter = (req, file, cb) => {
         cb(null, true)
     } else {
         cb(null, false)
-        cb(new Error("Invalid File Format..File Should be (jpg, png, jpeg or heif) !!"))
+        cb(new Error("Invalid file format..file should be (jpg, png, jpeg or heif)!"))
     }
 }
 

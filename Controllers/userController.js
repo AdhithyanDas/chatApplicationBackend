@@ -6,7 +6,7 @@ exports.userRegistration = async (req, res) => {
     try {
         const { fullName, email, password } = req.body
         if (!fullName || !email || !password) {
-            res.status(406).json("Invalid Data !!")
+            res.status(406).json("Invalid data!")
         } else {
             const salt = await bcrypt.genSalt(10)
             const hashedPassword = await bcrypt.hash(password, salt)
@@ -16,11 +16,11 @@ exports.userRegistration = async (req, res) => {
             })
 
             if (password.length < 6) {
-                res.status(400).json("Password must be atleast 6 characters !!")
+                res.status(400).json("Password must be atleast 6 characters!")
             } else {
                 const user = await Users.findOne({ email })
                 if (user) {
-                    res.status(400).json("Email already exists !!")
+                    res.status(400).json("Email already exists!")
                 } else {
                     await newUser.save()
                     res.status(200).json(newUser)
@@ -38,19 +38,19 @@ exports.userLogin = async (req, res) => {
     try {
         const { email, password } = req.body
         if (!email || !password) {
-            res.status(406).json("Invalid Data !!")
+            res.status(406).json("Invalid data!")
         } else {
             const existingUser = await Users.findOne({ email })
             if (existingUser) {
                 const isPasswordCorrect = await bcrypt.compare(password, existingUser.password)
                 if (!isPasswordCorrect) {
-                    res.status(404).json("Invalid email/password")
+                    res.status(404).json("Invalid email/password!")
                 } else {
                     const token = jwt.sign({ userId: existingUser._id }, process.env.SECRET_KEY)
                     res.status(200).json({ token, fullName: existingUser.fullName, email: existingUser.email, profilePic: existingUser.profilePic, _id: existingUser._id })
                 }
             } else {
-                res.status(404).json("Invalid email/password")
+                res.status(404).json("Invalid email/password!")
             }
         }
     } catch (err) {
@@ -75,7 +75,7 @@ exports.profileUpdate = async (req, res) => {
         existingProfile.email = email
         existingProfile.profilePic = profilePic
         await existingProfile.save()
-        res.status(200).json("Profile Updated !!")
+        res.status(200).json("Profile updated!")
 
     } catch (err) {
         console.log(err);
