@@ -7,7 +7,7 @@ const chatApp = express()
 const server = http.createServer(chatApp)
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:5173"],
+        origin: ["https://chat-application-plum-rho.vercel.app"],
         methods: ["POST", "GET", "PUT", "DELETE"]
     }
 })
